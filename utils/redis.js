@@ -3,7 +3,7 @@ import redis from "redis";
 
 let reddisConnectionObject;
 async function redisConnect() {
-    const client = redis.createClient({ port: 6379});
+    const client = redis.createClient({ port: process.env.REDIS_PORT });
     reddisConnectionObject = client;
 
     client.on('error', (err) => console.error('Redis Client Error:', err));
