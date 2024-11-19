@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const { getRecentlyViewedProducts } = require('../controllers/userController.js');
+import { Router } from 'express';
+const router = Router();
+import { getRecentlyViewedProduct } from '../../controllers/userController.js';
+import authMiddleware from '../../middlewares/authMiddleware.js';
 
 // Route to get recently viewed products for a user
-router.get('/:userId/recentlyViewed', getRecentlyViewedProducts);
+router.get('/:userId/recentlyViewed', authMiddleware, getRecentlyViewedProduct);
 
-module.exports = router;
+export default router;
