@@ -1,18 +1,19 @@
-import { getRecentlyViewed } from '../dao/userDAO';
-import { redisClient } from '../utils/redis';
-import { MAX_RECENTLY_VIEWED } from '../constants/commonConstants';
+import userDAO from '../dao/userDAO.js';
+import redisClient from '../utils/redis';
+// import { MAX_RECENTLY_VIEWED } from '../constants/commonConstants';
 
-export async function getRecentlyViewed(userId) {
+async function getRecentlyViewed(userId) {
   const cacheKey = `recentlyViewed:${userId}`;
-  console.log('cacheKey', redisClient);
-  const cachedData = await redisClient.get(cacheKey);
+  const cachedData = await redisClient.redisConnectionObject.get(cacheKey);
 
   if (cachedData) {
     return JSON.parse(cachedData);
   }
 
-  const recentlyViewed = await getRecentlyViewed(userId);
-  redisClient.setex(cacheKey, 3600, JSON.stringify(recentlyViewed));
+  const recentlyViewed = await userDAO.getRecentlyViewedData(userId);
+  redisClient.redisConnectionObject.set(cacheKey, JSON.stringify(recentlyViewed), 3600);
 
   return recentlyViewed;
 }
+
+export { getRecentlyViewed };

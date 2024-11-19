@@ -1,10 +1,9 @@
 import redis from "redis";
-// import { REDIS_PORT } from "../constants/commonConstants";
 
-let reddisConnectionObject;
+let redisConnectionObject;
 async function redisConnect() {
     const client = redis.createClient({ port: process.env.REDIS_PORT });
-    reddisConnectionObject = client;
+    redisConnectionObject = client;
 
     client.on('error', (err) => console.error('Redis Client Error:', err));
 
@@ -18,4 +17,4 @@ async function redisConnect() {
     }
 }
 
-export default { reddisConnectionObject, redisConnect }
+export default { redisConnectionObject, redisConnect }
