@@ -1,4 +1,4 @@
-import { auth } from 'firebase-admin';
+import admin from 'firebase-admin';
 
 export default async (req, res, next) => {
   const token = req.headers.authorization?.split('Bearer ')[1];
@@ -7,7 +7,7 @@ export default async (req, res, next) => {
   }
 
   try {
-    const decodedToken = await auth().verifyIdToken(token);
+    const decodedToken = await admin.auth().verifyIdToken(token);
     req.user = decodedToken;
     next();
   } catch (error) {

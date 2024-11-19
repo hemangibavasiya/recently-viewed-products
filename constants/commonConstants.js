@@ -1,4 +1,4 @@
-const PORT = 4000;
+const PORT = process.env.PORT || 3000;;
 const MAX_RECENTLY_VIEWED = 10;
 const REDIS_PORT = 6379
 
