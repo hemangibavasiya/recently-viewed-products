@@ -52,8 +52,8 @@ app.use('/api-docs', serve, setup(swaggerDocument));
 
 app.use('/api', allRoutes);
 
-app.listen(process.env.PORT , () => {
-  console.log(`Server is running on port ${process.env.PORT }`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
 
 app.use(logger.httRequestErrorLogger);
