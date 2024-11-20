@@ -70,9 +70,9 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 // Initialize Firebase App
 const firebaseConfig = {
-  apiKey: 'AIzaSyDj7hE38Ey0VSu7EKZVRHN66YQHcSyscD0',
-  authDomain: 'recently-viewed-products-81b06.firebaseapp.com',
-  projectId: 'recently-viewed-products-81b06',
+  apiKey: '***********************',
+  authDomain: '****************************',
+  projectId: '******************',
 };
 
 const app = initializeApp(firebaseConfig);

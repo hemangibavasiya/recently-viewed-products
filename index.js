@@ -1,5 +1,4 @@
 import express, { json } from 'express';
-import admin from 'firebase-admin';
 import { serve, setup } from 'swagger-ui-express';
 import { config } from 'dotenv';
 import cors from 'cors';
@@ -11,7 +10,9 @@ import customResponseHandler from './utils/response.js';
 import errorHandler from './utils/error.js';
 import allRoutes from './routes/index.js';
 import { redisConnect } from './utils/redis.js';
+import initializeFirestore from './models/connection.js'
 
+initializeFirestore()
 const corsOptions = {
   allowedHeaders: ['authorization', 'Authorization', 'Origin', 'Content-Type', 'Accept'],
   allowedOrigins: ['http://localhost:3000', 'https://example.com']
@@ -22,10 +23,8 @@ config();
 (async () => {
   await redisConnect()
 })();
-admin.initializeApp({
-  credential: admin.credential.cert('./serviceAccountKey.json'),
-  databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`
-});
+
+
 
 const app = express();
 app.use(logger.httpRequestLogger);
